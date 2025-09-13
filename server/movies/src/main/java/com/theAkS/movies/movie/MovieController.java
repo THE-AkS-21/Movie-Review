@@ -3,16 +3,14 @@ package com.theAkS.movies.movie;
 import com.theAkS.movies.dto.MovieDto;
 import com.theAkS.movies.dto.ReviewDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/movies")
+@CrossOrigin(origins = "*")
 public class MovieController {
 
     private final MovieService movieService;
