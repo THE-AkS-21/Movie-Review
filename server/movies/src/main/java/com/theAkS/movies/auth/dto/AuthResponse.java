@@ -15,9 +15,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {
-    
-    private String token;
-    private String type = "Bearer";
+
+    private String token; // Removed @Builder.Default from here
+
+    @Builder.Default
+    private String type = "Bearer"; // Added default value here
+
     private Long id;
     private String username;
     private String email;
@@ -27,7 +30,7 @@ public class AuthResponse {
     private String avatarUrl;
     private Set<String> roles;
     private LocalDateTime expiresAt;
-    
+
     public static AuthResponse fromUser(User user, String token, LocalDateTime expiresAt) {
         return AuthResponse.builder()
                 .token(token)

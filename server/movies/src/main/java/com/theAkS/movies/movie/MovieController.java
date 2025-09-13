@@ -2,6 +2,7 @@ package com.theAkS.movies.movie;
 
 import com.theAkS.movies.dto.MovieDto;
 import com.theAkS.movies.dto.ReviewDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/movies")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class MovieController {
 
     private final MovieService movieService;
-
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     @GetMapping
     public ResponseEntity<List<MovieDto>> getAllMovies() {
@@ -46,8 +44,8 @@ public class MovieController {
                 movie.getReleaseDate(),
                 movie.getTrailerLink(),
                 movie.getPoster(),
-                movie.getGenre(),
-                movie.getBackdrop(),
+                movie.getGenres(),   // Corrected from getGenre()
+                movie.getBackdrops(), // Corrected from getBackdrop()
                 reviewDtos
         );
     }
