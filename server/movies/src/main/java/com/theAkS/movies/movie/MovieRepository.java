@@ -1,4 +1,4 @@
-package com.theAkS.movies;
+package com.theAkS.movies.movie;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;

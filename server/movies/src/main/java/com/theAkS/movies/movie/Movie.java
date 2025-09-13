@@ -1,5 +1,6 @@
-package com.theAkS.movies;
+package com.theAkS.movies.movie;
 
+import com.theAkS.movies.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
