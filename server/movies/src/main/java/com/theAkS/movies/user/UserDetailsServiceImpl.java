@@ -28,12 +28,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         
         return UserPrincipal.create(user);
     }
-    
+
     @Transactional
     public UserDetails loadUserById(Long id) {
+        // Corrected the constructor call to match the exception's definition
         User user = userRepository.findByIdWithRoles(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-        
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
         return UserPrincipal.create(user);
     }
     
