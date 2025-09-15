@@ -26,7 +26,7 @@ RUN apk add --no-cache curl
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy built application from build stage
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Create nginx user and set permissions
 RUN addgroup -g 1001 -S nginx && \

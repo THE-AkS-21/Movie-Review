@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import  React from 'react';
+import  ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { theme } from './theme';
-import App from './App';
 import './index.css';
+import App from './App.tsx';
+import { theme } from './theme.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
