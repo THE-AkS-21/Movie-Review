@@ -72,10 +72,9 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ movieId, onReviewAdded }) => {
       setSubmitSuccess(false);
 
       // Submit to API
-      const response = await api.post('/api/v1/reviews', {
-        body: data.body,
-        rating: data.rating,
-        movieId: movieId,
+      const response = await api.post('/reviews', {
+        reviewBody: data.body,
+        imdbId: movieId,
       });
 
       if (response.data.success) {

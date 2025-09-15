@@ -10,7 +10,7 @@ import api from '../api/axiosConfig';
  */
 export const login = async (credentials: LoginCredentials): Promise<{ user: User; token: string }> => {
   try {
-    const response = await api.post<ApiResponse<{ user: User; token: string }>>('/api/v1/auth/login', {
+    const response = await api.post<ApiResponse<{ user: User; token: string }>>('/auth/login', {
       username: credentials.username,
       password: credentials.password,
     });
@@ -36,7 +36,7 @@ export const login = async (credentials: LoginCredentials): Promise<{ user: User
  */
 export const logout = async (): Promise<void> => {
   try {
-    await api.post('/api/v1/auth/logout');
+    await api.post('/auth/logout');
   } catch (error: any) {
     // Log error but don't throw - logout should always succeed locally
     console.error('Logout API error:', error);
@@ -48,7 +48,7 @@ export const logout = async (): Promise<void> => {
  */
 export const refreshToken = async (): Promise<{ user?: User; token: string }> => {
   try {
-    const response = await api.post<ApiResponse<{ user?: User; token: string }>>('/api/v1/auth/refresh');
+    const response = await api.post<ApiResponse<{ user?: User; token: string }>>('/auth/refresh');
     
     if (!response.data.success) {
       throw new Error(response.data.message || 'Token refresh failed');
@@ -76,7 +76,7 @@ export const register = async (userData: {
   lastName?: string;
 }): Promise<{ user: User; token: string }> => {
   try {
-    const response = await api.post<ApiResponse<{ user: User; token: string }>>('/api/v1/auth/register', userData);
+    const response = await api.post<ApiResponse<{ user: User; token: string }>>('/auth/register', userData);
 
     if (!response.data.success) {
       throw new Error(response.data.message || 'Registration failed');
@@ -99,7 +99,7 @@ export const register = async (userData: {
  */
 export const verifyToken = async (): Promise<boolean> => {
   try {
-    const response = await api.get<ApiResponse<{ valid: boolean }>>('/api/v1/auth/verify');
+    const response = await api.get<ApiResponse<{ valid: boolean }>>('/auth/verify');
     return response.data.success && response.data.data.valid;
   } catch (error) {
     return false;
@@ -111,7 +111,7 @@ export const verifyToken = async (): Promise<boolean> => {
  */
 export const getCurrentUser = async (): Promise<User> => {
   try {
-    const response = await api.get<ApiResponse<User>>('/api/v1/auth/me');
+    const response = await api.get<ApiResponse<User>>('/auth/me');
     
     if (!response.data.success) {
       throw new Error(response.data.message || 'Failed to fetch user data');

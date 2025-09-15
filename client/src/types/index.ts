@@ -6,6 +6,7 @@
 export interface Review {
   id?: string;
   body: string;
+  rating?: number;
   createdAt?: string;
   updatedAt?: string;
   userId?: string;
@@ -23,7 +24,7 @@ export interface Movie {
   poster: string;
   genres: string[];
   backdrops: string[];
-  reviewIds: Review[];
+  reviews: Review[];
   plot?: string;
   director?: string;
   cast?: string[];
