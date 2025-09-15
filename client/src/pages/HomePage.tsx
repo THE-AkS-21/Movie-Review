@@ -65,8 +65,8 @@ const HomePage: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        
-        const moviesData = await Promise.all([
+
+        const [moviesData] = await Promise.all([
           getMovies()
         ]);
         
