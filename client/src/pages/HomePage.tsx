@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getMovies, getFeaturedMovies } from '../services/movieService';
 import { Movie } from '../types';
 import Hero from '../components/hero/Hero';
@@ -65,14 +65,12 @@ const HomePage: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        
-        const [moviesData, featuredData] = await Promise.all([
-          getMovies(),
-          getFeaturedMovies(6)
+
+        const [moviesData] = await Promise.all([
+          getMovies()
         ]);
         
         setMovies(moviesData);
-        setFeaturedMovies(featuredData);
       } catch (err: any) {
         console.error('Error fetching movies:', err);
         setError(err.message || 'Failed to fetch movies. Please try again later.');

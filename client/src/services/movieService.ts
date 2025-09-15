@@ -19,13 +19,15 @@ export const getMovies = async (filters?: MovieFilters): Promise<Movie[]> => {
     if (filters?.sortBy) params.append('sortBy', filters.sortBy);
     if (filters?.sortOrder) params.append('sortOrder', filters.sortOrder);
 
-    const response = await api.get<ApiResponse<Movie[]>>(`/api/v1/movies?${params.toString()}`);
-    
-    if (!response.data.success) {
+    const response = await api.get<ApiResponse<Movie[]>>(`/movies`);
+    console.log(response);
+    console.log(response.data.success);
+
+    if (!response.data) {
       throw new Error(response.data.message || 'Failed to fetch movies');
     }
 
-    return response.data.data;
+    return response.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Failed to fetch movies. Please try again later.',
@@ -57,7 +59,7 @@ export const getMoviesPaginated = async (
     if (filters?.sortBy) params.append('sortBy', filters.sortBy);
     if (filters?.sortOrder) params.append('sortOrder', filters.sortOrder);
 
-    const response = await api.get<ApiResponse<PaginatedResponse<Movie>>>(`/api/v1/movies/paginated?${params.toString()}`);
+    const response = await api.get<ApiResponse<PaginatedResponse<Movie>>>(`/movies/paginated?${params.toString()}`);
     
     if (!response.data.success) {
       throw new Error(response.data.message || 'Failed to fetch movies');
@@ -79,13 +81,13 @@ export const getMoviesPaginated = async (
  */
 export const getMovie = async (id: string): Promise<Movie> => {
   try {
-    const response = await api.get<ApiResponse<Movie>>(`/api/v1/movies/${id}`);
-    
-    if (!response.data.success) {
+    const response = await api.get<ApiResponse<Movie>>(`/movies/${id}`);
+    var result = response.data;
+    if (!response.data) {
       throw new Error(response.data.message || 'Movie not found');
     }
+    return result;
 
-    return response.data.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Failed to fetch movie details. Please try again later.',
@@ -109,13 +111,13 @@ export const searchMovies = async (query: string, filters?: Omit<MovieFilters, '
     if (filters?.sortBy) params.append('sortBy', filters.sortBy);
     if (filters?.sortOrder) params.append('sortOrder', filters.sortOrder);
 
-    const response = await api.get<ApiResponse<Movie[]>>(`/api/v1/movies/search?${params.toString()}`);
+    const response = await api.get<ApiResponse<Movie[]>>(`/movies/search?${params.toString()}`);
     
-    if (!response.data.success) {
+    if (!response.data) {
       throw new Error(response.data.message || 'Search failed');
     }
 
-    return response.data.data;
+    return response.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Search failed. Please try again later.',
@@ -131,13 +133,13 @@ export const searchMovies = async (query: string, filters?: Omit<MovieFilters, '
  */
 export const getMoviesByGenre = async (genre: string): Promise<Movie[]> => {
   try {
-    const response = await api.get<ApiResponse<Movie[]>>(`/api/v1/movies/genre/${encodeURIComponent(genre)}`);
+    const response = await api.get<ApiResponse<Movie[]>>(`/movies/genre/${encodeURIComponent(genre)}`);
     
-    if (!response.data.success) {
+    if (!response.data) {
       throw new Error(response.data.message || 'Failed to fetch movies by genre');
     }
 
-    return response.data.data;
+    return response.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Failed to fetch movies by genre. Please try again later.',
@@ -153,13 +155,13 @@ export const getMoviesByGenre = async (genre: string): Promise<Movie[]> => {
  */
 export const getFeaturedMovies = async (limit: number = 10): Promise<Movie[]> => {
   try {
-    const response = await api.get<ApiResponse<Movie[]>>(`/api/v1/movies/featured?limit=${limit}`);
+    const response = await api.get<ApiResponse<Movie[]>>(`/movies/featured?limit=${limit}`);
     
-    if (!response.data.success) {
+    if (!response.data) {
       throw new Error(response.data.message || 'Failed to fetch featured movies');
     }
 
-    return response.data.data;
+    return response.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Failed to fetch featured movies. Please try again later.',
@@ -175,13 +177,13 @@ export const getFeaturedMovies = async (limit: number = 10): Promise<Movie[]> =>
  */
 export const getGenres = async (): Promise<string[]> => {
   try {
-    const response = await api.get<ApiResponse<string[]>>('/api/v1/movies/genres');
+    const response = await api.get<ApiResponse<string[]>>('/movies/genres');
     
-    if (!response.data.success) {
+    if (!response.data) {
       throw new Error(response.data.message || 'Failed to fetch genres');
     }
 
-    return response.data.data;
+    return response.data;
   } catch (error: any) {
     const appError: AppError = {
       message: error.response?.data?.message || 'Failed to fetch genres. Please try again later.',

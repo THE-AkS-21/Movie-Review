@@ -55,7 +55,7 @@ const ReviewPage: React.FC = () => {
       setError(null);
       const movieData = await getMovie(id);
       setMovie(movieData);
-      setReviews(movieData.reviewIds || []);
+      setReviews(movieData.reviews || []);
     } catch (err: any) {
       console.error('Error fetching movie:', err);
       setError(err.message || 'Could not load reviews for this movie. Please try again later.');
