@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "movies")
@@ -25,8 +26,15 @@ public class Movie {
     private String releaseDate;
     private String trailerLink;
     private String poster;
-    private List<String> genres;
-    private List<String> backdrops;
+
+    // ✅ Initialize all list fields to prevent NullPointerExceptions
+    @Builder.Default
+    private List<String> genres = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> backdrops = new ArrayList<>();
+
     @DocumentReference
-    private List<Review> reviewIds;
+    @Builder.Default
+    private List<Review> reviewIds = new ArrayList<>();
 }
