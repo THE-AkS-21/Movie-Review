@@ -85,7 +85,7 @@ gradlew
 gradlew.bat
 
 # Docker
-.dockerignore
+server/movies/.dockerignore
 
 # Database
 *.db
