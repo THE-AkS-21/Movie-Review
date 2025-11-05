@@ -40,7 +40,7 @@ services:
   movie-review-api:
     build:
       context: ./server
-      dockerfile: Dockerfile
+      dockerfile: server/movies/Dockerfile
     container_name: movie-review-api-prod
     restart: always
     environment:

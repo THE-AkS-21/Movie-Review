@@ -111,8 +111,8 @@ A full-stack movie review application built with React, Spring Boot, and Postgre
    ```bash
    npm install
    ```
-
-3. **Start the development server**
+   
+3. **Start the frontend development server**
    ```bash
    npm start
    ```
