@@ -142,7 +142,14 @@
 			<artifactId>spring-dotenv</artifactId>
 			<version>4.0.0</version>
 		</dependency>
-	</dependencies>
+
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-starter-secrets-manager</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>
