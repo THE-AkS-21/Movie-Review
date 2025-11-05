@@ -16,12 +16,6 @@ services:
       CORS_ORIGINS: "http://localhost:3000"
       SPRING_FLYWAY_ENABLED: "true"
       SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 15s
-      timeout: 5s
-      start_period: 30s
-      retries: 3
 
   movie-review-frontend:
     build:
@@ -35,12 +29,4 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      movies-api:
-        condition: service_healthy
-    healthcheck:
-      # 'serve' returns index.html at '/', so root works for HC
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+      - movies-api

@@ -51,8 +51,8 @@ EXPOSE 8080
 
 # NOTE: Spring Boot Actuator default is /actuator/health.
 # If you have it behind /api/v1, keep that; otherwise change to /actuator/health.
-HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
-  CMD curl -fsS http://127.0.0.1:8080/actuator/health | grep -q '"status":"UP"' || exit 1
+#HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
+#  CMD curl -fsS http://127.0.0.1:8080/actuator/health | grep -q '"status":"UP"' || exit 1
   # If your actuator is under a base path, use:
   # CMD curl -fsS http://127.0.0.1:8080/api/v1/actuator/health | grep -q '"status":"UP"' || exit 1
 
