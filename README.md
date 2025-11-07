@@ -235,51 +235,51 @@ The application uses PostgreSQL with the following default settings:
 
 ### Build and run all services
 ```bash
-docker-compose up --build
+         docker-compose up --build
 ```
 
 ### Run in background
 ```bash
-docker-compose up -d
+         docker-compose up -d
 ```
 
 ### View logs
 ```bash
-docker-compose logs -f [service-name]
+         docker-compose logs -f [service-name]
 ```
 
 ### Stop all services
 ```bash
-docker-compose down
+         docker-compose down
 ```
 
 ### Stop and remove volumes
 ```bash
-docker-compose down -v
+         docker-compose down -v
 ```
 
 ### Rebuild specific service
 ```bash
-docker-compose up --build [service-name]
+         docker-compose up --build [service-name]
 ```
 
 ## 🧪 Testing
 
 ### Backend Tests
 ```bash
-cd server/movies
-./mvnw test
+         cd server/movies
+         ./mvnw test
 ```
 
 ### Frontend Tests
 ```bash
-cd client
-npm test
+         cd client
+         npm test
 ```
 
 ### Integration Tests
 ```bash
-docker-compose -f docker-compose.test.yml up --build
+         docker-compose -f docker-compose.test.yml up --build
 ```
 
 ## 📈 Monitoring
