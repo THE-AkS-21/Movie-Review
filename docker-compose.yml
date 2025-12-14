@@ -3,7 +3,7 @@ services:
     build:
       context: ./server/movies
       dockerfile: Dockerfile
-    image: movies-api:latest
+    image: movie-review-server:latest
     container_name: backend
     restart: unless-stopped
     ports:
