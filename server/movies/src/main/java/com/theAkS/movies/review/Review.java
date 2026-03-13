@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDateTime;
 
 @Document(collection = "reviews")
 @Data
@@ -17,9 +18,15 @@ public class Review {
     @Id
     private ObjectId id;
     private String body;
+    private Integer rating;
+    private String username; // Added anonymous username field
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Keep constructor for backward compatibility if needed
-    public Review(String body) {
+    public Review(String body, Integer rating, String username) {
         this.body = body;
+        this.rating = rating;
+        this.username = username;
+        this.createdAt = LocalDateTime.now();
     }
 }

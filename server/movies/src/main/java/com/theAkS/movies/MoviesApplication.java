@@ -7,12 +7,8 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
-// Add the 'exclude' attribute to disable auto-configuration
-@SpringBootApplication(exclude = {
-        DataSourceAutoConfiguration.class,
-        MongoAutoConfiguration.class,
-        MongoDataAutoConfiguration.class
-})
+
+@SpringBootApplication
 public class MoviesApplication {
 
     public static void main(String[] args) {

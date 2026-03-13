@@ -295,7 +295,7 @@ const ReviewPage: React.FC = () => {
                       <Box sx={{ flexGrow: 1 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                           <Typography variant="subtitle2" fontWeight={600}>
-                            Anonymous User
+                            {review.username || 'Anonymous User'}
                           </Typography>
                           {review.createdAt && (
                             <Typography variant="caption" color="text.secondary">

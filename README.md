@@ -98,6 +98,8 @@ A full-stack movie review application built with React, Spring Boot, and Postgre
 3. **Run the application**
    ```bash
    ./mvnw spring-boot:run
+   #or
+   export $(grep -v '^#' .env | xargs) && ./mvnw clean spring-boot:run
    ```
 
 #### Frontend Setup

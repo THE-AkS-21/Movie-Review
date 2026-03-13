@@ -1,4 +1,16 @@
+version: '3.8'
+
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: movie-review-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - movie-review-network
+
   movies-review-server:
     build:
       context: ./server/movies
@@ -9,13 +21,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      AWS_REGION: ap-south-1
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      SPRING_DATA_MONGODB_DATABASE: "movie-api-db"
-      CORS_ORIGINS: "http://localhost:3000"
-      SPRING_FLYWAY_ENABLED: "true"
-      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/movie-api-db
+      - CORS_ORIGINS=http://localhost:3000
+    depends_on:
+      - mongodb
     networks:
       - movie-review-network
 
@@ -38,3 +47,6 @@ services:
 networks:
   movie-review-network:
     driver: bridge
+
+volumes:
+  mongodb_data:

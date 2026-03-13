@@ -35,18 +35,19 @@ public class MovieController {
 
     private MovieDto convertToDto(Movie movie) {
         List<ReviewDto> reviewDtos = movie.getReviewIds().stream()
-                .map(review -> new ReviewDto(review.getBody()))
+                .map(review -> new ReviewDto(
+                        review.getId() != null ? review.getId().toHexString() : null,
+                        review.getBody(),
+                        review.getRating(),
+                        review.getUsername(), // ADDED MISSING USERNAME HERE
+                        review.getCreatedAt()
+                ))
                 .collect(Collectors.toList());
 
         return new MovieDto(
-                movie.getImdbID(),
-                movie.getTitle(),
-                movie.getReleaseDate(),
-                movie.getTrailerLink(),
-                movie.getPoster(),
-                movie.getGenres(),   // Corrected from getGenre()
-                movie.getBackdrops(), // Corrected from getBackdrop()
-                reviewDtos
+                movie.getImdbID(), movie.getTitle(), movie.getReleaseDate(),
+                movie.getTrailerLink(), movie.getPoster(), movie.getGenres(),
+                movie.getBackdrops(), reviewDtos
         );
     }
 }

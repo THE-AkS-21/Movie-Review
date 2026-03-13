@@ -13,11 +13,6 @@ COPY pom.xml .
 #    If you prefer a cache mount, keep the second block (commented) instead.
 RUN mvn -B -U -DskipTests dependency:resolve
 
-# Alternative with cache mount (uncomment to use; includes corruption guard)
-# RUN --mount=type=cache,target=/root/.m2 \
-#     rm -rf /root/.m2/repository/org/apache/maven/plugins/maven-dependency-plugin && \
-#     mvn -B -U -DskipTests dependency:go-offline
-
 # 3) Build
 COPY src ./src
 RUN mvn -B -DskipTests package
@@ -48,13 +43,6 @@ USER spring
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75 -XX:+ExitOnOutOfMemoryError"
 
 EXPOSE 8080
-
-# NOTE: Spring Boot Actuator default is /actuator/health.
-# If you have it behind /api/v1, keep that; otherwise change to /actuator/health.
-#HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
-#  CMD curl -fsS http://127.0.0.1:8080/actuator/health | grep -q '"status":"UP"' || exit 1
-  # If your actuator is under a base path, use:
-  # CMD curl -fsS http://127.0.0.1:8080/api/v1/actuator/health | grep -q '"status":"UP"' || exit 1
 
 # Use sh -c to allow $JAVA_OPTS expansion
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

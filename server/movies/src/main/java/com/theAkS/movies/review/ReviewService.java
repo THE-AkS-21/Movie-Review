@@ -12,14 +12,12 @@ import org.springframework.stereotype.Service;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final MongoTemplate mongoTemplate; // Use MongoTemplate for complex updates
+    private final MongoTemplate mongoTemplate;
 
-    public Review createReview(String reviewBody, String imdbId) {
-        // Create and insert the new review, which generates its ID
-        Review review = reviewRepository.insert(new Review(reviewBody));
+    public Review createReview(String reviewBody, String imdbId, Integer rating, String username) {
+        // Use the authenticated username
+        Review review = reviewRepository.insert(new Review(reviewBody, rating, username));
 
-        // Use MongoTemplate to update the Movie document by pushing the new review
-        // into the reviewIds array.
         mongoTemplate.update(Movie.class)
                 .matching(Criteria.where("imdbID").is(imdbId))
                 .apply(new Update().push("reviewIds").value(review))
