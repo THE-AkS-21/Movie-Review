@@ -13,7 +13,7 @@ services:
 
   movies-review-server:
     build:
-      context: ./server/movies
+      context: ./movies
       dockerfile: Dockerfile
     image: movie-review-server:latest
     container_name: backend
@@ -30,7 +30,7 @@ services:
 
   movie-review-client:
     build:
-      context: ./client
+      context: ./movies-client
       dockerfile: Dockerfile
       args:
         VITE_API_BASE_URL: "http://localhost:8080/api/v1"

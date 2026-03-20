@@ -106,22 +106,29 @@ temp/
 *.sln
 *.sw?
 
-# Client specific
-client/build/
-client/dist/
-client/.env
-client/.env.local
-client/.env.development.local
-client/.env.test.local
-client/.env.production.local
+# Docker
+movies/.dockerignore           # Changed from server/movies/.dockerignore
 
 # Server specific
-server/target/
-server/.env
-server/.env.local
-server/.env.development.local
-server/.env.test.local
-server/.env.production.local
+movies/target/                 # Changed from server/target/
+movies/.env                    # Changed from server/.env
+
+# Client specific
+movies-client/build/
+movies-client/dist/
+movies-client/.env
+movies-client/.env.local
+movies-client/.env.development.local
+movies-client/.env.test.local
+movies-client/.env.production.local
+
+# Server specific
+movies/target/
+movies/.env
+movies/.env.local
+movies/.env.development.local
+movies/.env.test.local
+movies/.env.production.local
 
 # Docker volumes
 postgres_data/
